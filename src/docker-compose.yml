@@ -4,18 +4,11 @@ services:
   catalogdb:
     image: postgres
 
-  catalogapi:
+  catalog.api:
+    image: ${DOCKER_REGISTRY-}catalogapi
     build:
-      context: ./Services/Catalog/Catalog.API
-      dockerfile: Dockerfile
-    container_name: catalogapi
-    ports:
-      - "5050:5050"
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Host=catalogdb;Database=CatalogDb;Username=postgres;Password=postgres
-    depends_on:
-      - catalogdb
+      context: .
+      dockerfile: Services/Catalog/Catalog.API/Dockerfile
 
 volumes:
   postgres_catalog:
