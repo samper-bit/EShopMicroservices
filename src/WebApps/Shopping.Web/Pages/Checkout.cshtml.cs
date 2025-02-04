@@ -19,6 +19,8 @@ namespace Shopping.Web.Pages
         {
             logger.LogInformation("Checkout button clicked");
 
+            Cart = await basketService.LoadUserBasket();
+
             if (!ModelState.IsValid)
             {
                 return Page();
